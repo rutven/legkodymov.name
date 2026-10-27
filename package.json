@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
-    "test:build": "npm run build && node --test \"tests/build/**/*.test.mjs\"",
+    "test:build": "INCLUDE_FIXTURES=1 astro build && node --test \"tests/build/**/*.test.mjs\"",
     "generate-types": "wrangler types",
     "deploy": "npm run build && wrangler deploy"
   },

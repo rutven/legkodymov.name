@@ -10,3 +10,9 @@ test("home page is UTF-8 English with developer name", () => {
   assert.match(html, /Sergei Legkodymov/);
   assert.doesNotMatch(html, /Sergey/);
 });
+
+test("only third-party script is the Cloudflare Web Analytics beacon", () => {
+  const html = readFileSync("dist/index.html", "utf8");
+  assert.match(html, /static\.cloudflareinsights\.com\/beacon\.min\.js/);
+  assert.doesNotMatch(html, /googletagmanager/);
+});
