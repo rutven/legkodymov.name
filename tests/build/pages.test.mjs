@@ -26,4 +26,9 @@ test("coming-soon platform has no link", () => {
 test("site privacy page states cookieless analytics", () =>
   assert.match(read("dist/privacy/index.html"), /Cloudflare Web Analytics/));
 
-test("404 page exists", () => assert.ok(existsSync("dist/404.html")));
+test("404 page renders not-found content", () => {
+  const html = read("dist/404.html");
+  assert.match(html, /Page not found/);
+  assert.match(html, /href="\/"/);
+  assert.doesNotMatch(html, /rel="canonical"/);
+});

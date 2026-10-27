@@ -9,6 +9,7 @@ interface Props {
 
 const { title, description, lang = "en" } = Astro.props;
 const year = new Date().getFullYear();
+const canonical = Astro.url.pathname.startsWith("/404") ? null : new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -19,6 +20,7 @@ const year = new Date().getFullYear();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
   </head>
   <body>
     <header class="site-header">

@@ -16,3 +16,11 @@ test("only third-party script is the Cloudflare Web Analytics beacon", () => {
   assert.match(html, /static\.cloudflareinsights\.com\/beacon\.min\.js/);
   assert.doesNotMatch(html, /googletagmanager/);
 });
+
+test("pages declare canonical URL on the apex domain", () => {
+  assert.match(readFileSync("dist/index.html", "utf8"), /<link rel="canonical" href="https:\/\/legkodymov\.name\/"/);
+  assert.match(
+    readFileSync("dist/apps/uci-srpski/index.html", "utf8"),
+    /<link rel="canonical" href="https:\/\/legkodymov\.name\/apps\/uci-srpski\/"/,
+  );
+});
