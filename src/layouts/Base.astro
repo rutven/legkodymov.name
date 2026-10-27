@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+}
+
+const { title, description, lang = "en" } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="site-name">Sergei Legkodymov</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>© {year} Sergei Legkodymov</span>
+      <a href="mailto:apps@legkodymov.name">apps@legkodymov.name</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </body>
+</html>
