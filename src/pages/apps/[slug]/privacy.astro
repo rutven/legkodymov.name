@@ -1,0 +1,25 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Markdown from "../../../components/Markdown.astro";
+import type { AppEntry } from "../../../lib/apps";
+import { getApps } from "../../../lib/collection";
+
+export async function getStaticPaths() {
+  const apps = await getApps();
+  return apps.flatMap((app) =>
+    "hosted" in app.privacy ? [{ params: { slug: app.slug }, props: { app, body: app.privacy.body } }] : [],
+  );
+}
+
+interface Props {
+  app: AppEntry;
+  body: string;
+}
+
+const { app, body } = Astro.props;
+---
+
+<Base title={`${app.name} privacy policy`} description={`Privacy policy for ${app.name}.`}>
+  <p><a href={`/apps/${app.slug}/`}>← {app.name}</a></p>
+  <Markdown body={body} />
+</Base>

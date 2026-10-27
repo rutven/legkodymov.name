@@ -1,0 +1,90 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { resolveApp, type AppEntry } from "../../../lib/apps";
+import { getApps } from "../../../lib/collection";
+
+export async function getStaticPaths() {
+  const apps = await getApps();
+  return apps.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+interface Props {
+  app: AppEntry;
+}
+
+const { app } = Astro.props;
+const resolved = resolveApp(app);
+const external = (href: string) => /^https?:\/\//.test(href);
+---
+
+<Base title={`${app.name} — Sergei Legkodymov`} description={app.tagline}>
+  <div class="app-head">
+    {
+      app.icon ? (
+        <img class="tile-icon" src={app.icon} alt="" width="72" height="72" />
+      ) : (
+        <span class="tile-icon tile-letter" aria-hidden="true">{app.name[0]}</span>
+      )
+    }
+    <div>
+      <h1>{app.name}</h1>
+      <p class="lead">{app.tagline}</p>
+    </div>
+  </div>
+  <p>{app.description}</p>
+  {app.operator !== "Sergei Legkodymov" && <p class="muted">Operated by {app.operator}</p>}
+
+  {
+    app.screenshots && app.screenshots.length > 0 && (
+      <div class="screenshots">
+        {app.screenshots.map((src) => (
+          <img src={src} alt={`${app.name} screenshot`} loading="lazy" />
+        ))}
+      </div>
+    )
+  }
+
+  <h2>Get it</h2>
+  <ul class="links">
+    {
+      resolved.platforms.map((p) =>
+        p.href ? (
+          <li>
+            <a href={p.href} rel="noopener">{p.label} ↗</a>
+          </li>
+        ) : (
+          <li>
+            {p.label} <span class="muted">coming soon</span>
+          </li>
+        ),
+      )
+    }
+  </ul>
+
+  <h2>Privacy and support</h2>
+  <ul class="links">
+    <li>
+      {
+        external(resolved.privacyHref) ? (
+          <a href={resolved.privacyHref} rel="noopener">Privacy policy ↗</a>
+        ) : (
+          <a href={resolved.privacyHref}>Privacy policy</a>
+        )
+      }
+    </li>
+    <li>
+      {
+        "href" in resolved.deletion ? (
+          external(resolved.deletion.href) ? (
+            <a href={resolved.deletion.href} rel="noopener">Delete account ↗</a>
+          ) : (
+            <a href={resolved.deletion.href}>Delete account</a>
+          )
+        ) : (
+          <>Delete account: {resolved.deletion.note}</>
+        )
+      }
+    </li>
+    <li>Support: <a href={resolved.supportHref}>{app.supportEmail}</a></li>
+  </ul>
+</Base>

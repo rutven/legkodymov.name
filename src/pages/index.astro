@@ -1,7 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
+import AppTile from "../components/AppTile.astro";
+import { getApps } from "../lib/collection";
+
+const apps = await getApps();
 ---
 
-<Base title="Sergei Legkodymov — Apps" description="Apps by Sergei Legkodymov.">
-  <h1>Apps</h1>
+<Base title="Sergei Legkodymov — Apps" description="Apps by Sergei Legkodymov, with their privacy policies and support contacts.">
+  <h1>Apps by Sergei Legkodymov.</h1>
+  <p class="lead">Each app below has its own page with platforms, privacy policy, account deletion and support contacts.</p>
+  <div class="tiles">
+    {apps.map((app) => <AppTile app={app} />)}
+  </div>
+  <p>Developer contact: <a href="mailto:apps@legkodymov.name">apps@legkodymov.name</a></p>
 </Base>
