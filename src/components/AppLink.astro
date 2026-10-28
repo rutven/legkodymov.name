@@ -1,0 +1,11 @@
+---
+import type { Link } from "../lib/apps";
+
+interface Props {
+  link: Link;
+}
+
+const { link } = Astro.props;
+---
+
+<a href={link.href}><slot />{link.external && " ↗"}</a>

@@ -1,12 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
+import { developer } from "../lib/developer";
+import { useStrings } from "../i18n";
+
+const s = useStrings(Astro.currentLocale);
 ---
 
-<Base title="Privacy — Sergei Legkodymov" description="Privacy notice for legkodymov.name.">
-  <h1>Privacy</h1>
+<Base title={s.sitePrivacyTitle} description={s.sitePrivacyDescription}>
+  <h1>{s.sitePrivacyHeading}</h1>
   <p>
-    This site doesn't use cookies and doesn't collect personal data. It's hosted on Cloudflare, which keeps standard
-    request logs, and uses Cloudflare Web Analytics for cookieless, aggregate visit statistics. Each app listed here has
-    its own privacy policy, linked from its page. Questions: <a href="mailto:apps@legkodymov.name">apps@legkodymov.name</a>.
+    {s.sitePrivacyBody} <a href={`mailto:${developer.email}`}>{developer.email}</a>.
   </p>
 </Base>

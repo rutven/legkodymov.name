@@ -1,6 +1,6 @@
 # legkodymov.name
 
-Sergei Legkodymov's developer site: a catalog of his apps with platform links, privacy policies, account deletion info and support contacts. Static Astro site served by a Cloudflare Worker (static assets) at https://legkodymov.name.
+Sergei Legkodymov's developer site: a catalog of his apps with platform links, privacy policies, Deletion pages and Support addresses. Static Astro site served by a Cloudflare Worker (static assets) at https://legkodymov.name.
 
 ```
 npm run dev          # local dev server

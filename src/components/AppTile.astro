@@ -1,4 +1,5 @@
 ---
+import AppIcon from "./AppIcon.astro";
 import type { AppEntry } from "../lib/apps";
 
 interface Props {
@@ -9,13 +10,7 @@ const { app } = Astro.props;
 ---
 
 <a class="tile" href={`/apps/${app.slug}/`}>
-  {
-    app.icon ? (
-      <img class="tile-icon" src={app.icon} alt="" width="56" height="56" />
-    ) : (
-      <span class="tile-icon tile-letter" aria-hidden="true">{app.name[0]}</span>
-    )
-  }
+  <AppIcon app={app} size={56} />
   <span class="tile-text">
     <span class="tile-name">{app.name}</span>
     <span class="tile-tagline">{app.tagline}</span>

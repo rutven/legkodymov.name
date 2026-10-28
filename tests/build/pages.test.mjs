@@ -32,3 +32,15 @@ test("404 page renders not-found content", () => {
   assert.match(html, /href="\/"/);
   assert.doesNotMatch(html, /rel="canonical"/);
 });
+
+test("app page lists features and website", () => {
+  const html = read("dist/apps/apartio/index.html");
+  assert.match(html, /<h2>Features<\/h2>/);
+  assert.match(html, /href="https:\/\/apartio\.rs"/);
+});
+
+test("home uses Glossary wording", () => {
+  const html = read("dist/index.html");
+  assert.doesNotMatch(html, /contact/i);
+  assert.match(html, /Developer email/);
+});

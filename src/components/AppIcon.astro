@@ -1,0 +1,18 @@
+---
+import type { AppEntry } from "../lib/apps";
+
+interface Props {
+  app: AppEntry;
+  size: number;
+}
+
+const { app, size } = Astro.props;
+---
+
+{
+  app.icon ? (
+    <img class="tile-icon" src={app.icon} alt="" width={size} height={size} />
+  ) : (
+    <span class="tile-icon tile-letter" aria-hidden="true">{app.name[0]}</span>
+  )
+}
