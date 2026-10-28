@@ -1,0 +1,100 @@
+---
+import Base from "../../../layouts/Base.astro";
+import AppIcon from "../../../components/AppIcon.astro";
+import AppLink from "../../../components/AppLink.astro";
+import { resolveApp, type AppEntry } from "../../../lib/apps";
+import { getApps } from "../../../lib/collection";
+import { developer } from "../../../lib/developer";
+import { useStrings } from "../../../i18n";
+
+export async function getStaticPaths() {
+  const apps = await getApps();
+  return apps.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+interface Props {
+  app: AppEntry;
+}
+
+const { app } = Astro.props;
+const resolved = resolveApp(app);
+const s = useStrings(Astro.currentLocale);
+---
+
+<Base title={s.appTitle(app.name)} description={app.tagline}>
+  <div class="app-head">
+    <AppIcon app={app} size={72} />
+    <div>
+      <h1>{app.name}</h1>
+      <p class="lead">{app.tagline}</p>
+    </div>
+  </div>
+  <p>{app.description}</p>
+  {app.operator !== developer.name && <p class="muted">{s.operatedBy(app.operator)}</p>}
+
+  {
+    app.features && app.features.length > 0 && (
+      <>
+        <h2>{s.features}</h2>
+        <ul>
+          {app.features.map((f) => (
+            <li>{f}</li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    app.screenshots && app.screenshots.length > 0 && (
+      <div class="screenshots">
+        {app.screenshots.map((src) => (
+          <img src={src} alt={s.screenshot(app.name)} loading="lazy" />
+        ))}
+      </div>
+    )
+  }
+
+  <h2>{s.getIt}</h2>
+  <ul class="links">
+    {
+      resolved.website && (
+        <li>
+          <AppLink link={resolved.website}>{s.website}</AppLink>
+        </li>
+      )
+    }
+    {
+      resolved.platforms.map((p) =>
+        p.href ? (
+          <li>
+            <AppLink link={{ href: p.href, external: true }}>{p.label}</AppLink>
+          </li>
+        ) : (
+          <li>
+            {p.label} <span class="muted">{s.comingSoon}</span>
+          </li>
+        ),
+      )
+    }
+  </ul>
+
+  <h2>{s.privacyAndSupport}</h2>
+  <ul class="links">
+    <li>
+      <AppLink link={resolved.privacy}>{s.privacyPolicy}</AppLink>
+    </li>
+    <li>
+      {
+        "href" in resolved.deletion ? (
+          <AppLink link={resolved.deletion}>{s.deleteAccount}</AppLink>
+        ) : (
+          <>
+            {s.deleteAccount}: {resolved.deletion.note}
+          </>
+        )
+      }
+    </li>
+    <li>{s.support}: <a href={resolved.supportHref}>{app.supportAddress}</a></li>
+  </ul>
+</Base>

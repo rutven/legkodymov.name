@@ -1,0 +1,13 @@
+{
+  "slug": "demo",
+  "name": "Demo App",
+  "tagline": "Test fixture with no site of its own.",
+  "description": "Fixture used by build tests only.",
+  "features": ["Fixture feature"],
+  "order": 99,
+  "operator": "Sergei Legkodymov",
+  "platforms": [{ "kind": "android" }],
+  "supportAddress": "apps@legkodymov.name",
+  "privacy": { "hosted": true, "body": "# Privacy\n\nDemo hosted policy." },
+  "deletion": { "hosted": true, "body": "# Delete account\n\nDemo deletion page." }
+}

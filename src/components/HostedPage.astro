@@ -1,0 +1,19 @@
+---
+import Base from "../layouts/Base.astro";
+import Markdown from "./Markdown.astro";
+import type { AppEntry } from "../lib/apps";
+
+interface Props {
+  app: AppEntry;
+  body: string;
+  title: string;
+  description: string;
+}
+
+const { app, body, title, description } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <p><a href={`/apps/${app.slug}/`}>← {app.name}</a></p>
+  <Markdown body={body} />
+</Base>

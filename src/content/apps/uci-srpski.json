@@ -1,0 +1,14 @@
+{
+  "slug": "uci-srpski",
+  "name": "Uči Srpski",
+  "tagline": "Learn Serbian vocabulary with spaced repetition.",
+  "description": "Build a personal deck of Serbian words from a shared dictionary, with translations and examples filled in for you. FSRS spaced repetition schedules each review so words stick. Available on the web, with an Android app on the way.",
+  "features": ["Personal deck built from a shared Serbian dictionary", "Translations and examples filled in for you", "FSRS spaced repetition schedules each review"],
+  "order": 1,
+  "operator": "Sergei Legkodymov",
+  "platforms": [{ "kind": "web", "url": "https://ucisrpski.app" }, { "kind": "android" }],
+  "supportAddress": "support@ucisrpski.app",
+  "privacy": { "url": "https://ucisrpski.app/privacy" },
+  "deletion": { "url": "https://ucisrpski.app/delete-account" },
+  "icon": "/apps/uci-srpski/icon.png"
+}

@@ -1,0 +1,19 @@
+---
+import Base from "../layouts/Base.astro";
+import AppTile from "../components/AppTile.astro";
+import { getApps } from "../lib/collection";
+import { developer } from "../lib/developer";
+import { useStrings } from "../i18n";
+
+const apps = await getApps();
+const s = useStrings(Astro.currentLocale);
+---
+
+<Base title={s.homeTitle} description={s.homeDescription}>
+  <h1>{s.homeHeading}</h1>
+  <p class="lead">{s.homeLead}</p>
+  <div class="tiles">
+    {apps.map((app) => <AppTile app={app} />)}
+  </div>
+  <p>{s.developerEmail}: <a href={`mailto:${developer.email}`}>{developer.email}</a></p>
+</Base>

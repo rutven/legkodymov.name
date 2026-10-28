@@ -1,0 +1,11 @@
+---
+import Base from "../layouts/Base.astro";
+import { useStrings } from "../i18n";
+
+const s = useStrings(Astro.currentLocale);
+---
+
+<Base title={s.notFoundTitle} description={s.notFoundHeading}>
+  <h1>{s.notFoundHeading}</h1>
+  <p><a href="/">{s.notFoundHome}</a></p>
+</Base>

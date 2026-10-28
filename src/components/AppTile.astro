@@ -1,0 +1,18 @@
+---
+import AppIcon from "./AppIcon.astro";
+import type { AppEntry } from "../lib/apps";
+
+interface Props {
+  app: AppEntry;
+}
+
+const { app } = Astro.props;
+---
+
+<a class="tile" href={`/apps/${app.slug}/`}>
+  <AppIcon app={app} size={56} />
+  <span class="tile-text">
+    <span class="tile-name">{app.name}</span>
+    <span class="tile-tagline">{app.tagline}</span>
+  </span>
+</a>

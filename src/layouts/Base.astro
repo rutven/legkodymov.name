@@ -1,0 +1,42 @@
+---
+import "../styles/global.css";
+import { developer } from "../lib/developer";
+import { defaultLocale, useStrings } from "../i18n";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const lang = Astro.currentLocale ?? defaultLocale;
+const s = useStrings(lang);
+const year = new Date().getFullYear();
+const canonical = Astro.url.pathname.startsWith("/404") ? null : new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="site-name">{developer.name}</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>© {year} {developer.name}</span>
+      <a href={`mailto:${developer.email}`}>{developer.email}</a>
+      <a href="/privacy/">{s.footerPrivacy}</a>
+    </footer>
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "44742bd62d304616b167a8eeb5c8ddc8"}'></script>
+  </body>
+</html>

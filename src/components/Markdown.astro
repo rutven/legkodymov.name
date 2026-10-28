@@ -1,0 +1,11 @@
+---
+import { marked } from "marked";
+
+interface Props {
+  body: string;
+}
+
+const html = await marked.parse(Astro.props.body);
+---
+
+<article class="prose" set:html={html} />

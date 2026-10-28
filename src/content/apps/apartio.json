@@ -1,0 +1,14 @@
+{
+  "slug": "apartio",
+  "name": "Apartio",
+  "tagline": "Apartment discovery for Serbia.",
+  "description": "Apartio collects rental listings from Serbian sites, removes duplicates and translates them. Save a search and get new matches on the web or in Telegram.",
+  "features": ["Listings collected from Serbian rental sites", "Duplicates removed and listings translated", "Saved searches with new matches on the web or in Telegram"],
+  "order": 2,
+  "operator": "Sergei Legkodymov PR Beograd",
+  "website": "https://apartio.rs",
+  "platforms": [{ "kind": "web", "url": "https://search.apartio.rs" }, { "kind": "telegram", "url": "https://t.me/apartio_rs_bot" }],
+  "supportAddress": "support@apartio.rs",
+  "privacy": { "url": "https://search.apartio.rs/privacy" },
+  "deletion": { "note": "Delete your account in Account settings on search.apartio.rs, or email support@apartio.rs from the account's address; it's deleted within 30 days." }
+}

@@ -1,0 +1,18 @@
+---
+import HostedPage from "../../../components/HostedPage.astro";
+import type { AppEntry } from "../../../lib/apps";
+import { hostedPagePaths } from "../../../lib/collection";
+import { useStrings } from "../../../i18n";
+
+export const getStaticPaths = () => hostedPagePaths("privacy");
+
+interface Props {
+  app: AppEntry;
+  body: string;
+}
+
+const { app, body } = Astro.props;
+const s = useStrings(Astro.currentLocale);
+---
+
+<HostedPage app={app} body={body} title={s.hostedPrivacyTitle(app.name)} description={s.hostedPrivacyDescription(app.name)} />
