@@ -7,6 +7,13 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
+  },
   "routes": [
     { "pattern": "legkodymov.name", "custom_domain": true },
     { "pattern": "www.legkodymov.name", "custom_domain": true }
